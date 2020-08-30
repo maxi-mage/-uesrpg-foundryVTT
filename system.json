@@ -7,7 +7,7 @@
   "templateVersion": 2,
   "author": "maxi-mage",
   "esmodules": ["modules/uesrpg.js"],
-  "styles": ["css/uesrpg.css"],
+  "styles": ["styles/uesrpg.css"],
   "scripts": [],
   "packs": [],
   "languages": [
