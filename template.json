@@ -1,0 +1,232 @@
+{
+  "Actor": {
+    "types": ["character", "npc", "monster"],
+    "templates": {
+      "characteristics": {
+        "str": {
+          "value": 20,
+          "bonus": 2
+        },
+        "end": {
+          "value": 20,
+          "bonus": 2
+        },
+        "ag": {
+          "value": 20,
+          "bonus": 2
+        },
+        "int": {
+          "value": 20,
+          "bonus": 2
+        },
+        "wp": {
+          "value": 20,
+          "bonus": 2
+        },
+        "prc": {
+          "value": 20,
+          "bonus": 2
+        },
+        "prs": {
+          "value": 20,
+          "bonus": 2
+        },
+        "lck":{
+          "value": 20,
+          "bonus": 2
+        }
+      },
+      "attributes": {
+        "health": {
+          "value": 10,
+          "min": 0,
+          "max": 10
+        },
+        "magicka": {
+          "value": 20,
+          "min": 0,
+          "max": 20
+        },
+        "stamina": {
+          "value": 2,
+          "min": 0,
+          "max": 2
+        },
+        "wounds": {
+          "value": 6,
+          "min": 0,
+          "max": 6
+        },
+        "initRating": {
+          "value": 6
+        },
+        "speed": {
+          "value": 6
+        },
+        "carry": {
+          "value": 12
+        },
+        "action": {
+          "value": 3
+        },
+        "luckPoints": {
+          "value": 2
+        },
+        "luckyNum": {
+          "value": []
+        },
+        "unluckyNum": {
+          "value": []
+        }
+      },
+      "details": {
+        "name": "",
+        "race": "",
+        "gender": "",
+        "size": "",
+        "experience": {
+          "value": 0
+        },
+        "birthSign": "",
+        "elite": "",
+        "biography": ""
+      }
+    },
+    "character": {
+      "templates": ["characteristics", "attributes", "details"]
+    },
+    "npc": {
+      "templates": ["characteristics", "attributes"],
+      "race": "",
+      "elite": "",
+      "size": ""
+    },
+    "montster": {
+      "templates": ["characteristics", "attributes"],
+      "race": "",
+      "elite": "",
+      "size": ""
+      }
+  },
+  "Item": {
+    "types": ["item", "skill", "spell", "talent", "trait", "weapon", "ammo", "armor", "shield", "potion", "poison", "gem"],
+    "templates": {
+      "base": {
+        "description": ""
+      },
+      "class": {
+        "characteristics": "",
+        "ranks": 0
+      },
+      "economy": {
+        "encumbrance": 0,
+        "cost": 0
+      },
+      "equipment": {
+        "qualities": "",
+        "material": "",
+        "enchantLvl": 0,
+        "equipped": false,
+        "magic": false
+      },
+      "ingredient": {
+        "ingredientType": "",
+        "strength": 0,
+        "depth": 0
+      }
+    },
+    "item": {
+      "templates": ["base", "economy"],
+      "quantity": 1
+    },
+    "skill": {
+      "templates": ["base", "class"],
+      "skillRank": -1,
+      "characteristics": [],
+      "effect": ""
+    },
+    "spell": {
+      "templates": ["base", "class"],
+      "spellLevel": 1,
+      "type": "",
+      "characteristics": [],
+      "cost": 1,
+      "strength": "",
+      "duration": ""
+    },
+    "talent": {
+      "templates": ["base", "class"],
+      "talentLevel": 0,
+      "characteristics": [],
+      "effect": ""
+    },
+    "trait": {
+      "templates": ["base"]
+    },
+    "weapon": {
+      "templates": ["base", "economy", "equipment"],
+      "damage": "",
+      "reach": "",
+      "range": "",
+      "twohanded": false,
+      "ammo": 0
+    },
+    "ammo": {
+      "templates": ["base", "economy", "equipment"],
+      "damageMod": 0,
+      "ammoType": ""
+    },
+    "armor": {
+      "templates": ["base", "economy", "equipment"],
+      "armorType": "",
+      "AR": {
+        "head": 0,
+        "lArm": 0,
+        "rArm": 0,
+        "lLeg": 0,
+        "rLeg": 0,
+        "body": 0
+      },
+      "magicAR": {
+        "head": 0,
+        "lArm": 0,
+        "rArm": 0,
+        "lLeg": 0,
+        "rLeg": 0,
+        "body": 0,
+        "magicType": ""
+      },
+      "location": 0
+    },
+    "shield": {
+      "templates": ["base", "economy", "equipment"],
+      "shieldType": "",
+      "blockRating": 0,
+      "magicBR": {
+        "BR": 0,
+        "magicType": ""
+      },
+    },
+    "potion": {
+      "templates": ["base", "class", "economy", "ingredient"],
+      "potionType": "",
+      "healing": 0,
+      "effect": "",
+      "duration": ""
+    },
+    "poison": {
+      "templates": ["base", "class", "economy", "ingredient"],
+      "poisonType": "",
+      "damage": "",
+      "effect": "",
+      "duration": ""
+    },
+    "gem": {
+      "templates": ["base", "class", "economy"]
+      "type": "",
+      "soul": "",
+      "energy": 0,
+      "maxEnergy": 1500
+    }
+  }
+}

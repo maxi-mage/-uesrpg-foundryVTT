@@ -1,0 +1,28 @@
+{
+  "name": "uesrpg",
+  "title": "Unofficial Elder Scrolls RPG",
+  "description": "The Unofficial Elder Scrolls RPG for FoundryVTT",
+  "minimumCoreVersion": "0.5.5",
+  "compatibleCoreVersion": "0.5.5",
+  "templateVersion": 2,
+  "author": "maxi-mage",
+  "esmodules": ["modules/uesrpg.js"],
+  "styles": ["css/uesrpg.css"],
+  "scripts": [],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "gridDistance": 1,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "magicka",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "LICENSE.txt"
+}
