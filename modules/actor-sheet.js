@@ -7,8 +7,8 @@ export class SimpleActorSheet extends ActorSheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-  	  classes: ["worldbuilding", "sheet", "actor"],
-  	  template: "systems/worldbuilding/templates/actor-sheet.html",
+  	  classes: ["uesrpg", "sheet", "actor"],
+  	  template: "uesrpg/templates/actor-sheet.html",
       width: 600,
       height: 600,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}],
@@ -22,11 +22,11 @@ export class SimpleActorSheet extends ActorSheet {
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean", "Formula", "Resource"];
-    for ( let attr of Object.values(data.data.attributes) ) {
+    for ( let attr of Object.values(data.data.characteristics) ) {
       attr.isCheckbox = attr.dtype === "Boolean";
       attr.isResource = attr.dtype === "Resource";
     }
-    data.shorthand = !!game.settings.get("worldbuilding", "macroShorthand");
+    data.shorthand = !!game.settings.get("uesrpg", "macroShorthand");
     return data;
   }
 
@@ -36,7 +36,7 @@ export class SimpleActorSheet extends ActorSheet {
 	activateListeners(html) {
     super.activateListeners(html);
 
-    // Handle rollable attributes.
+    // Handle rollable characteristics.
     html.find('.items .rollable').click(ev => {
       let button = $(ev.currentTarget);
       let r = new Roll(button.data('roll'), this.actor.getRollData());
@@ -67,7 +67,7 @@ export class SimpleActorSheet extends ActorSheet {
     });
 
     // Add or Remove Attribute
-    html.find(".attributes").on("click", ".attribute-control", this._onClickAttributeControl.bind(this));
+    html.find(".characteristics").on("click", ".attribute-control", this._onClickAttributeControl.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -84,7 +84,7 @@ export class SimpleActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Listen for click events on an attribute control to modify the composition of attributes in the sheet
+   * Listen for click events on an attribute control to modify the composition of characteristics in the sheet
    * @param {MouseEvent} event    The originating left click event
    * @private
    */
@@ -92,7 +92,7 @@ export class SimpleActorSheet extends ActorSheet {
     event.preventDefault();
     const a = event.currentTarget;
     const action = a.dataset.action;
-    const attrs = this.object.data.data.attributes;
+    const attrs = this.object.data.data.characteristics;
     const form = this.form;
 
     // Add new attribute
@@ -105,7 +105,7 @@ export class SimpleActorSheet extends ActorSheet {
         ++nk;
         newValue = `attr${nk}`;
       };
-      newKey.innerHTML = `<input type="text" name="data.attributes.attr${nk}.key" value="${newValue}"/>`;
+      newKey.innerHTML = `<input type="text" name="data.characteristics.attr${nk}.key" value="${newValue}"/>`;
       newKey = newKey.children[0];
       form.appendChild(newKey);
       await this._onSubmit(event);
@@ -124,9 +124,9 @@ export class SimpleActorSheet extends ActorSheet {
   /** @override */
   _updateObject(event, formData) {
 
-    // Handle the free-form attributes list
-    const formAttrs = expandObject(formData).data.attributes || {};
-    const attributes = Object.values(formAttrs).reduce((obj, v) => {
+    // Handle the free-form characteristics list
+    const formAttrs = expandObject(formData).data.characteristics || {};
+    const characteristics = Object.values(formAttrs).reduce((obj, v) => {
       let k = v["key"].trim();
       if ( /[\s\.]/.test(k) )  return ui.notifications.error("Attribute keys may not contain spaces or periods");
       delete v["key"];
@@ -134,16 +134,16 @@ export class SimpleActorSheet extends ActorSheet {
       return obj;
     }, {});
 
-    // Remove attributes which are no longer used
-    for ( let k of Object.keys(this.object.data.data.attributes) ) {
-      if ( !attributes.hasOwnProperty(k) ) attributes[`-=${k}`] = null;
+    // Remove characteristics which are no longer used
+    for ( let k of Object.keys(this.object.data.data.characteristics) ) {
+      if ( !characteristics.hasOwnProperty(k) ) characteristics[`-=${k}`] = null;
     }
 
     // Re-combine formData
-    formData = Object.entries(formData).filter(e => !e[0].startsWith("data.attributes")).reduce((obj, e) => {
+    formData = Object.entries(formData).filter(e => !e[0].startsWith("data.characteristics")).reduce((obj, e) => {
       obj[e[0]] = e[1];
       return obj;
-    }, {_id: this.object._id, "data.attributes": attributes});
+    }, {_id: this.object._id, "data.characteristics": characteristics});
 
     // Update the Actor
     return this.object.update(formData);
